@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const FooterContainer = styled.div`
   position: absolut;
@@ -7,4 +7,4 @@ export const FooterContainer = styled.div`
   width: 100%;
   background-color: #dcdcdc;
   padding: 1rem 0.2rem;
-`;
+`

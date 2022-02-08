@@ -1,6 +1,6 @@
-import React from "react";
-import { ItemContainer } from "./ItemList.styled";
-import infoIcon from "../../assets/info.png";
+import React from 'react'
+import { ItemContainer } from './ItemList.styled'
+import infoIcon from '../../assets/info.png'
 /* interface ItemListProps {
   nameProduct: string;
   stock: number;
@@ -11,7 +11,7 @@ import infoIcon from "../../assets/info.png";
   shortDescription: string;
 } */
 const ItemList = ({ item }) => {
-  console.log(item);
+  console.log(item)
   return (
     <ItemContainer>
       <img src={item.mainimage.url} /> {/* <h3 className="item-name"></h3> */}
@@ -33,7 +33,7 @@ const ItemList = ({ item }) => {
         </div>
       </div>
     </ItemContainer>
-  );
-};
+  )
+}
 
-export default ItemList;
+export default ItemList

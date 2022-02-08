@@ -1,9 +1,9 @@
-import { NavLink as Link } from "react-router-dom";
-import styled from "styled-components";
-import { FaBars } from "react-icons/fa";
+import { NavLink as Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { FaBars } from 'react-icons/fa'
 
 interface Props {
-  open: boolean;
+  open: boolean
 }
 
 export const Nav = styled.nav`
@@ -27,7 +27,7 @@ export const Nav = styled.nav`
     border-radius: 5px;
     border: 0.5px solid rgb(192, 192, 192);
   }
-`;
+`
 
 export const NavLink = styled(Link)`
   color: blue;
@@ -40,7 +40,7 @@ export const NavLink = styled(Link)`
   &.active {
     color: #15cdfc;
   }
-`;
+`
 
 export const NavMenu = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ export const NavMenu = styled.div`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`;
+`
 
 export const NavBtn = styled.nav`
   display: flex;
@@ -67,7 +67,7 @@ export const NavBtn = styled.nav`
       width: 2.2rem;
     }
   }
-`;
+`
 
 export const NavBtnLink = styled(Link)`
   border-radius: 4px;
@@ -85,7 +85,7 @@ export const NavBtnLink = styled(Link)`
     background: #fff;
     color: #010606;
   }
-`;
+`
 
 export const Bars = styled(FaBars)`
   display: none;
@@ -99,7 +99,7 @@ export const Bars = styled(FaBars)`
     font-size: 1.8rem;
     cursor: pointer;
   }
-`;
+`
 export const SideNav = styled.div<Props>`
   height: 100%;
   width: 0;
@@ -143,7 +143,7 @@ export const SideNav = styled.div<Props>`
   }
 
   @media screen and (max-width: 768px) {
-    width: ${(props): any => (props.open ? "60vw" : "0")};
+    width: ${(props): any => (props.open ? '60vw' : '0')};
   }
 
   @media screen and (max-height: 450px) {
@@ -154,4 +154,4 @@ export const SideNav = styled.div<Props>`
       font-size: 18px;
     }
   }
-`;
+`

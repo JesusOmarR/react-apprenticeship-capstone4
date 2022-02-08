@@ -1,12 +1,12 @@
-import { useFeaturedBanners } from "./utils/hooks/useFeaturedBanners";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import NavBar from "./UI/NavBar";
-import Footer from "./UI/Footer/Footer";
+import { useFeaturedBanners } from './utils/hooks/useFeaturedBanners'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import NavBar from './UI/NavBar'
+import Footer from './UI/Footer/Footer'
 
 function App() {
-  const { data, isLoading } = useFeaturedBanners();
-  console.log(data, isLoading);
+  const { data, isLoading } = useFeaturedBanners()
+  console.log(data, isLoading)
 
   return (
     <BrowserRouter>
@@ -18,7 +18,7 @@ function App() {
       </Switch>
       <Footer />
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

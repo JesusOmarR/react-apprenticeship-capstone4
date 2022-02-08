@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {
-  Nav,
-  NavMenu,
-  NavBtn,
-  SideNav,
-  NavBtnLink,
-  Bars,
-} from "./Navbar.styled";
+import { useState } from 'react'
+import { Nav, NavMenu, NavBtn, SideNav, Bars } from './Navbar.styled'
 
 function NavBar() {
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false)
 
   /*   useEffect(() => {
     const changeWidth = () => {
@@ -27,9 +20,9 @@ function NavBar() {
   }, []); */
 
   const toggleNav = () => {
-    setToggleMenu(!toggleMenu);
-    console.log("xd");
-  };
+    setToggleMenu(!toggleMenu)
+    console.log('xd')
+  }
 
   return (
     <>
@@ -57,7 +50,7 @@ function NavBar() {
         </a>
       </SideNav>
     </>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar

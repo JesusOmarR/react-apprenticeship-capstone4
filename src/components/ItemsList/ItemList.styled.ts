@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ItemContainer = styled.div`
   width: 19rem;
@@ -69,4 +69,4 @@ export const ItemContainer = styled.div`
       }
     }
   }
-`;
+`

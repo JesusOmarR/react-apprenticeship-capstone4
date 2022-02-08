@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const HomeContainer = styled.div`
   .banner-carousel {
@@ -37,7 +37,7 @@ export const HomeContainer = styled.div`
   .banner-item {
     color: black;
   }
-`;
+`
 
 export const ListContainer = styled.div`
   width: auto;
@@ -45,7 +45,7 @@ export const ListContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   margin: 1rem auto;
   align-items: center;
-`;
+`
 
 export const CategoriesContainer = styled.div`
   display: block;
@@ -53,7 +53,7 @@ export const CategoriesContainer = styled.div`
   text-align: center;
   width: 60vw;
   margin: 0 auto;
-`;
+`
 
 export const SliderItem = styled.div`
   display: inline-block;
@@ -76,4 +76,4 @@ export const SliderItem = styled.div`
     left: auto;
     color: white;
   }
-`;
+`

@@ -10,7 +10,7 @@ describe('Testing NavBar component', () => {
   it('display logo', () => {
     render(<NavBar />)
 
-    const Logo = screen.getByText('WizeTore')
+    const Logo = screen.getAllByText('WizeStore')[0]
     expect(Logo).toBeInTheDocument()
   })
 })

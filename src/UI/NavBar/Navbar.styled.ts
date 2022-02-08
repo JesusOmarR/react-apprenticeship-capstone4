@@ -18,6 +18,12 @@ export const Nav = styled.nav`
   z-index: 10;
   align-items: center;
 
+  a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
+
   input {
     align-items: center;
     justify-content: space-around;

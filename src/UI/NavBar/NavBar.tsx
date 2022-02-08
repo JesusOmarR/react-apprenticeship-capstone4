@@ -29,7 +29,9 @@ function NavBar() {
       <Nav>
         <Bars onClick={() => toggleNav()} />
         <NavMenu>
-          <h2>WizeStore</h2>
+          <a href="/">
+            <h2>WizeStore</h2>
+          </a>
         </NavMenu>
         <input />
         <NavBtn>

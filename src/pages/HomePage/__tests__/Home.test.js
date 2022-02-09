@@ -7,10 +7,11 @@ describe('Testing Home Page ', () => {
     render(<HomePage />)
   })
 
-  it('shows the product page when the button is clicked', () => {
+  it('shows the product page when the button is clicked', async () => {
     render(<HomePage />)
     const showProducts = screen.getByRole('showProducts')
     fireEvent.click(showProducts)
-    screen.getByText('This is the products page')
+    await new Promise((r) => setTimeout(r, 2000))
+    screen.getByText('Products page')
   })
 })

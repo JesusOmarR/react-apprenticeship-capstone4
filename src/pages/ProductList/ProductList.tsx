@@ -4,11 +4,20 @@ import productsMock from '../../mocks/en-us/products.json'
 import ItemList from '../../components/ItemsList/ItemList'
 import categories from '../../mocks/en-us/product-categories.json'
 import { Pagination } from 'react-bootstrap'
+import Loader from '../../UI/Loader'
 
 const ProductList = () => {
   const { results } = productsMock
   const [products, setProducts] = useState(results)
   const [filters, setFilters] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+  }, [])
 
   useEffect(() => {
     filterProducts(filters)
@@ -38,7 +47,9 @@ const ProductList = () => {
     setFilters((oldArray) => oldArray.filter((item) => item != filter))
   }
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <ProductsContainer>
       <SideBar>
         {categories.results.map((category: any) => (
@@ -52,6 +63,7 @@ const ProductList = () => {
         ))}
       </SideBar>
       <div className="grid-wrapper">
+        <h2>Products page</h2>
         <ProductsGrid>
           {products.map((product: any) => (
             <ItemList key={product.id} item={product.data} />

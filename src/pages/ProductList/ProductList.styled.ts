@@ -8,6 +8,7 @@ export const ProductsContainer = styled.div`
     margin: 1rem auto;
   }
   .grid-wrapper {
+    text-align: center;
     display: grid;
     grid-template-columns: minmax(80vw, 1fr);
     align-items: center;

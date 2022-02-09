@@ -58,7 +58,7 @@ const HomePage: React.FC<any> = () => {
   const [showProduct, setShowProducts] = useState(false)
   return (
     <>
-      {!showProduct ? (
+      {showProduct ? (
         <ProductList />
       ) : (
         <HomeContainer>

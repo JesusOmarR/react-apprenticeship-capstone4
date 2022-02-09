@@ -58,7 +58,7 @@ const HomePage: React.FC<any> = () => {
   const [showProduct, setShowProducts] = useState(false)
   return (
     <>
-      {showProduct ? (
+      {!showProduct ? (
         <ProductList />
       ) : (
         <HomeContainer>
@@ -98,9 +98,16 @@ const HomePage: React.FC<any> = () => {
               <ItemList key={product.id} item={product.data} />
             ))}
           </ListContainer>
+          <Button
+            variant="outline-info"
+            className="products-btn"
+            role="showProducts"
+            onClick={() => setShowProducts(true)}
+          >
+            View All Products
+          </Button>
         </HomeContainer>
       )}
-      <Button onClick={() => setShowProducts(true)}>View All Products</Button>
     </>
   )
 }

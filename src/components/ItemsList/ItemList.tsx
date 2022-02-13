@@ -1,16 +1,20 @@
 import React from 'react'
 import { ItemContainer } from './ItemList.styled'
 import infoIcon from '../../assets/info.png'
-/* interface ItemListProps {
-  nameProduct: string;
-  stock: number;
-  price: number;
-  images: [];
-  description: string;
-  mainImage: string;
-  shortDescription: string;
-} */
-const ItemList = ({ item }) => {
+interface ItemListProps {
+  // prettier-ignore
+  item: {
+    name: string;
+    price: number;
+    images: [];
+    description: string;
+    mainimage: { url: string };
+    shortDescription: string;
+    category: { slug: string };
+    short_description: string;
+  }
+}
+const ItemList: React.FC<ItemListProps> = ({ item }) => {
   return (
     <ItemContainer>
       <img src={item.mainimage.url} />

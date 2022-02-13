@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Carousel } from 'react-bootstrap'
 import {
   HomeContainer,
@@ -7,7 +7,6 @@ import {
   SliderItem,
 } from './Home.styled'
 import Slider from 'react-slick'
-import ProductList from '../ProductList'
 
 // Mock Data
 import featuredBanners from '../../mocks/en-us/featured-banners.json'
@@ -55,59 +54,53 @@ const HomePage: React.FC<any> = () => {
     ],
   }
 
-  const [showProduct, setShowProducts] = useState(false)
   return (
     <>
-      {showProduct ? (
-        <ProductList />
-      ) : (
-        <HomeContainer>
-          <Carousel className="banner-carousel">
-            {featuredBanners.results.map((banner: any) => (
-              <Carousel.Item key={banner.id}>
-                <Carousel.Caption className="banner-item">
-                  <h3>{banner.data.title}</h3>
-                  <p>{banner.data.description[0].text.substring(0, 50)}</p>
-                </Carousel.Caption>
-                <img
-                  className="d-block w-100"
-                  src={banner.data.main_image.url}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel>
+      <HomeContainer>
+        <Carousel className="banner-carousel">
+          {featuredBanners.results.map((banner: any) => (
+            <Carousel.Item key={banner.id}>
+              <Carousel.Caption className="banner-item">
+                <h3>{banner.data.title}</h3>
+                <p>{banner.data.description[0].text.substring(0, 50)}</p>
+              </Carousel.Caption>
+              <img
+                className="d-block w-100"
+                src={banner.data.main_image.url}
+                alt="First slide"
+              />
+            </Carousel.Item>
+          ))}
+        </Carousel>
 
-          <div>
-            <CategoriesContainer>
-              <h2> Categories</h2>
-              <Slider {...settings}>
-                {featuredCategorys.results.map((category: any) => (
-                  <SliderItem key={category.id}>
-                    <h3>{category.data.name}</h3>
+        <div>
+          <CategoriesContainer>
+            <h2> Categories</h2>
+            <Slider {...settings}>
+              {featuredCategorys.results.map((category: any) => (
+                <SliderItem key={category.id}>
+                  <h3>{category.data.name}</h3>
 
-                    <img src={category.data.main_image.url} />
-                  </SliderItem>
-                ))}
-              </Slider>
-            </CategoriesContainer>
-          </div>
+                  <img src={category.data.main_image.url} />
+                </SliderItem>
+              ))}
+            </Slider>
+          </CategoriesContainer>
+        </div>
 
-          <ListContainer>
-            {featuredProducts.results.map((product: any) => (
-              <ItemList key={product.id} item={product.data} />
-            ))}
-          </ListContainer>
-          <Button
-            variant="outline-info"
-            className="products-btn"
-            role="showProducts"
-            onClick={() => setShowProducts(true)}
-          >
-            View All Products
-          </Button>
-        </HomeContainer>
-      )}
+        <ListContainer>
+          {featuredProducts.results.map((product: any) => (
+            <ItemList key={product.id} item={product.data} />
+          ))}
+        </ListContainer>
+        <Button
+          variant="outline-info"
+          className="products-btn"
+          role="showProducts"
+        >
+          View All Products
+        </Button>
+      </HomeContainer>
     </>
   )
 }

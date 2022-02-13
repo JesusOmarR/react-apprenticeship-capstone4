@@ -23,7 +23,7 @@ const ProductList = () => {
     filterProducts(filters)
   }, [filters])
 
-  const filterProducts = (filter) => {
+  const filterProducts = (filter: any) => {
     if (filter.length === 0) {
       setProducts(productsMock.results)
       return
@@ -35,7 +35,7 @@ const ProductList = () => {
     setProducts(filtered)
   }
 
-  const addFilters = (filter) => {
+  const addFilters = (filter: any) => {
     if (filters.includes(filter)) {
       removeFilters(filter)
       return
@@ -43,7 +43,7 @@ const ProductList = () => {
     setFilters((oldArray) => [...oldArray, filter])
     console.log(filter)
   }
-  const removeFilters = (filter) => {
+  const removeFilters = (filter: any) => {
     setFilters((oldArray) => oldArray.filter((item) => item != filter))
   }
 

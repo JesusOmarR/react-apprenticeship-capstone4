@@ -11,13 +11,12 @@ import infoIcon from '../../assets/info.png'
   shortDescription: string;
 } */
 const ItemList = ({ item }) => {
-  console.log(item)
   return (
     <ItemContainer>
-      <img src={item.mainimage.url} /> {/* <h3 className="item-name"></h3> */}
+      <img src={item.mainimage.url} />
       <div className="item-info">
         <h2>{item.name}</h2>
-        <h3 className="item-name">${item.price}</h3>
+        <h3 className="item-name">$ {item.price}</h3>
       </div>
       <div className="more-info">
         <img src={infoIcon} />

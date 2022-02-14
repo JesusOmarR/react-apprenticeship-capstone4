@@ -5,6 +5,7 @@ export const HomeContainer = styled.div`
     text-align: center;
     display: flex;
     color: red;
+    justify-content: center;
     img {
       width: 100vw;
       height: 35vh;
@@ -36,6 +37,11 @@ export const HomeContainer = styled.div`
   }
   .banner-item {
     color: black;
+  }
+
+  .products-btn {
+    margin: 1rem auto;
+    display: flex;
   }
 `
 

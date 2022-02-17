@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage'
 import ProductList from './pages/ProductList'
 import NavBar from './UI/NavBar'
 import Footer from './UI/Footer/Footer'
+import ProductDetails from './pages/ProductDetails'
+import SearchPage from './pages/SearchPage'
 
 function App() {
   const { data, isLoading } = useFeaturedBanners()
@@ -22,6 +24,12 @@ function App() {
         </Route>
         <Route exact path="/products">
           <ProductList />
+        </Route>
+        <Route exact path="/products/:productId">
+          <ProductDetails />
+        </Route>
+        <Route exact path="/search">
+          <SearchPage />
         </Route>
       </Switch>
       <Footer />

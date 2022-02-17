@@ -1,9 +1,13 @@
 import React from 'react'
 import { ItemContainer } from './ItemList.styled'
 import infoIcon from '../../assets/info.png'
+import addToCart from '../../assets/add-to-cart.png'
+import { useHistory } from 'react-router-dom'
+
 interface ItemListProps {
   // prettier-ignore
   item: {
+    id: string;
     name: string;
     price: number;
     images: [];
@@ -15,12 +19,22 @@ interface ItemListProps {
   }
 }
 const ItemList: React.FC<ItemListProps> = ({ item }) => {
+  const history = useHistory()
+
   return (
-    <ItemContainer>
+    <ItemContainer onClick={() => history.push(`/products/${item.id}`)}>
       <img src={item.mainimage.url} />
       <div className="item-info">
-        <h2>{item.name}</h2>
-        <h3 className="item-name">$ {item.price}</h3>
+        <div className="info">
+          <h2>{item.name}</h2>
+          <h3 className="item-name">$ {item.price}</h3>
+        </div>
+
+        <div className="cart">
+          <button className="cart-btn">
+            <img src={addToCart} />
+          </button>
+        </div>
       </div>
       <div className="more-info">
         <img src={infoIcon} />
@@ -31,7 +45,7 @@ const ItemList: React.FC<ItemListProps> = ({ item }) => {
           </p>
           <p>
             <strong>Description: </strong>
-            {item.short_description}
+            {item.short_description.substring(0, 250)}
           </p>
         </div>
       </div>

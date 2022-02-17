@@ -7,12 +7,12 @@ import {
   SliderItem,
 } from './Home.styled'
 import Slider from 'react-slick'
-
-// Mock Data
-import featuredBanners from '../../mocks/en-us/featured-banners.json'
-import featuredProducts from '../../mocks/en-us/featured-products.json'
-import featuredCategorys from '../../mocks/en-us/product-categories.json'
 import ItemList from '../../components/ItemsList/ItemList'
+import { useFeaturedBanners } from '../../utils/hooks/useFeaturedBanners'
+import { useFeaturedCategories } from '../../utils/hooks/useFeaturedCategory'
+import { useFeaturedProducts } from '../../utils/hooks/useFeaturedProducts'
+import { useHistory } from 'react-router-dom'
+import Loader from '../../UI/Loader'
 
 // Styles
 import 'slick-carousel/slick/slick.css'
@@ -54,11 +54,21 @@ const HomePage: React.FC<any> = () => {
     ],
   }
 
-  return (
+  const history = useHistory()
+
+  const { data: featuredBanners, isLoading } = useFeaturedBanners()
+  const { data: featuredCategories, isLoading: LoadingCategories } =
+    useFeaturedCategories()
+  const { data: featuredProducts, isLoading: loadingProducts } =
+    useFeaturedProducts()
+
+  return isLoading || LoadingCategories || loadingProducts ? (
+    <Loader />
+  ) : (
     <>
       <HomeContainer>
         <Carousel className="banner-carousel">
-          {featuredBanners.results.map((banner: any) => (
+          {featuredBanners?.results?.map((banner: any) => (
             <Carousel.Item key={banner.id}>
               <Carousel.Caption className="banner-item">
                 <h3>{banner.data.title}</h3>
@@ -77,8 +87,11 @@ const HomePage: React.FC<any> = () => {
           <CategoriesContainer>
             <h2> Categories</h2>
             <Slider {...settings}>
-              {featuredCategorys.results.map((category: any) => (
-                <SliderItem key={category.id}>
+              {featuredCategories.results.map((category: any) => (
+                <SliderItem
+                  onClick={() => history.push(`/products?cat=${category.id}`)}
+                  key={category.id}
+                >
                   <h3>{category.data.name}</h3>
 
                   <img src={category.data.main_image.url} />
@@ -89,14 +102,20 @@ const HomePage: React.FC<any> = () => {
         </div>
 
         <ListContainer>
-          {featuredProducts.results.map((product: any) => (
-            <ItemList key={product.id} item={product.data} />
+          {featuredProducts?.results?.map((product: any) => (
+            <ItemList
+              key={product.id}
+              item={{ ...product.data, id: product.id }}
+            />
           ))}
         </ListContainer>
         <Button
           variant="outline-info"
           className="products-btn"
           role="showProducts"
+          onClick={() => {
+            history.push('/products')
+          }}
         >
           View All Products
         </Button>

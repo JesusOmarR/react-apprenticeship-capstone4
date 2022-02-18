@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import { API_BASE_URL } from '../constants'
 import { useLatestAPI } from './useLatestAPI'
 
-export function useFeaturedBanners() {
+export function useSearchProducts(searchTerm: any) {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI()
-  const [featuredBanners, setFeaturedBanners] = useState(() => ({
+  // prettier-ignore
+
+  const [foundProducts, setFoundProducts] = useState<any>(() => ({
     data: {},
     isLoading: true,
   }))
@@ -16,33 +18,33 @@ export function useFeaturedBanners() {
 
     const controller = new AbortController()
 
-    async function getFeaturedBanners() {
+    async function searchProducts() {
       try {
-        setFeaturedBanners({ data: {}, isLoading: true })
+        setFoundProducts({ data: {}, isLoading: true })
 
         const response = await fetch(
           `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
-            '[[at(document.type, "banner")]]'
-          )}&lang=en-us&pageSize=5`,
+            `[[at(document.type, "product")]]`
+          )}&q=[[fulltext(document, "${searchTerm}")]]&lang=en-us`,
           {
             signal: controller.signal,
           }
         )
         const data = await response.json()
 
-        setFeaturedBanners({ data, isLoading: false })
+        setFoundProducts({ data, isLoading: false })
       } catch (err) {
-        setFeaturedBanners({ data: {}, isLoading: false })
+        setFoundProducts({ data: {}, isLoading: false })
         console.error(err)
       }
     }
 
-    getFeaturedBanners()
+    searchProducts()
 
     return () => {
       controller.abort()
     }
-  }, [apiRef, isApiMetadataLoading])
+  }, [apiRef, isApiMetadataLoading, searchTerm])
 
-  return featuredBanners
+  return foundProducts
 }

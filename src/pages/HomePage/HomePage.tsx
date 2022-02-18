@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Carousel } from 'react-bootstrap'
 import {
   HomeContainer,
@@ -7,13 +7,12 @@ import {
   SliderItem,
 } from './Home.styled'
 import Slider from 'react-slick'
-import ProductList from '../ProductList'
-
-// Mock Data
-import featuredBanners from '../../mocks/en-us/featured-banners.json'
-import featuredProducts from '../../mocks/en-us/featured-products.json'
-import featuredCategorys from '../../mocks/en-us/product-categories.json'
 import ItemList from '../../components/ItemsList/ItemList'
+import { useFeaturedBanners } from '../../utils/hooks/useFeaturedBanners'
+import { useFeaturedCategories } from '../../utils/hooks/useFeaturedCategory'
+import { useFeaturedProducts } from '../../utils/hooks/useFeaturedProducts'
+import { useHistory } from 'react-router-dom'
+import Loader from '../../UI/Loader'
 
 // Styles
 import 'slick-carousel/slick/slick.css'
@@ -55,59 +54,72 @@ const HomePage: React.FC<any> = () => {
     ],
   }
 
-  const [showProduct, setShowProducts] = useState(false)
-  return (
+  const history = useHistory()
+
+  const { data: featuredBanners, isLoading } = useFeaturedBanners()
+  const { data: featuredCategories, isLoading: LoadingCategories } =
+    useFeaturedCategories()
+  const { data: featuredProducts, isLoading: loadingProducts } =
+    useFeaturedProducts()
+
+  return isLoading || LoadingCategories || loadingProducts ? (
+    <Loader />
+  ) : (
     <>
-      {showProduct ? (
-        <ProductList />
-      ) : (
-        <HomeContainer>
-          <Carousel className="banner-carousel">
-            {featuredBanners.results.map((banner: any) => (
-              <Carousel.Item key={banner.id}>
-                <Carousel.Caption className="banner-item">
-                  <h3>{banner.data.title}</h3>
-                  <p>{banner.data.description[0].text.substring(0, 50)}</p>
-                </Carousel.Caption>
-                <img
-                  className="d-block w-100"
-                  src={banner.data.main_image.url}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel>
+      <HomeContainer>
+        <Carousel className="banner-carousel">
+          {featuredBanners?.results?.map((banner: any) => (
+            <Carousel.Item key={banner.id}>
+              <Carousel.Caption className="banner-item">
+                <h3>{banner.data.title}</h3>
+                <p>{banner.data.description[0].text.substring(0, 50)}</p>
+              </Carousel.Caption>
+              <img
+                className="d-block w-100"
+                src={banner.data.main_image.url}
+                alt="First slide"
+              />
+            </Carousel.Item>
+          ))}
+        </Carousel>
 
-          <div>
-            <CategoriesContainer>
-              <h2> Categories</h2>
-              <Slider {...settings}>
-                {featuredCategorys.results.map((category: any) => (
-                  <SliderItem key={category.id}>
-                    <h3>{category.data.name}</h3>
+        <div>
+          <CategoriesContainer>
+            <h2> Categories</h2>
+            <Slider {...settings}>
+              {featuredCategories.results.map((category: any) => (
+                <SliderItem
+                  onClick={() => history.push(`/products?cat=${category.id}`)}
+                  key={category.id}
+                >
+                  <h3>{category.data.name}</h3>
 
-                    <img src={category.data.main_image.url} />
-                  </SliderItem>
-                ))}
-              </Slider>
-            </CategoriesContainer>
-          </div>
+                  <img src={category.data.main_image.url} />
+                </SliderItem>
+              ))}
+            </Slider>
+          </CategoriesContainer>
+        </div>
 
-          <ListContainer>
-            {featuredProducts.results.map((product: any) => (
-              <ItemList key={product.id} item={product.data} />
-            ))}
-          </ListContainer>
-          <Button
-            variant="outline-info"
-            className="products-btn"
-            role="showProducts"
-            onClick={() => setShowProducts(true)}
-          >
-            View All Products
-          </Button>
-        </HomeContainer>
-      )}
+        <ListContainer>
+          {featuredProducts?.results?.map((product: any) => (
+            <ItemList
+              key={product.id}
+              item={{ ...product.data, id: product.id }}
+            />
+          ))}
+        </ListContainer>
+        <Button
+          variant="outline-info"
+          className="products-btn"
+          role="showProducts"
+          onClick={() => {
+            history.push('/products')
+          }}
+        >
+          View All Products
+        </Button>
+      </HomeContainer>
     </>
   )
 }

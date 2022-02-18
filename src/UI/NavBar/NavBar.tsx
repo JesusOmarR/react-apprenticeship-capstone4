@@ -1,8 +1,13 @@
 import { useState } from 'react'
+import { Button } from 'react-bootstrap'
 import { Nav, NavMenu, NavBtn, SideNav, Bars } from './Navbar.styled'
+import { useHistory } from 'react-router-dom'
+import searchIcon from '../../assets/search.png'
 
 function NavBar() {
   const [toggleMenu, setToggleMenu] = useState(false)
+  const [searchInput, setSearchInput] = useState('')
+  const history = useHistory()
 
   /*   useEffect(() => {
     const changeWidth = () => {
@@ -24,6 +29,10 @@ function NavBar() {
     console.log('xd')
   }
 
+  const searchProducts = () => {
+    history.push(`/search?q=${searchInput}`)
+  }
+
   return (
     <>
       <Nav>
@@ -33,7 +42,14 @@ function NavBar() {
             <h2>WizeStore</h2>
           </a>
         </NavMenu>
-        <input />
+        <input
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        <Button className="searchBtn" onClick={searchProducts}>
+          {' '}
+          <img src={searchIcon} />{' '}
+        </Button>
         <NavBtn>
           <img
             onClick={() => toggleNav}
@@ -44,10 +60,10 @@ function NavBar() {
       </Nav>
 
       <SideNav open={toggleMenu} id="mySidenav">
-        <a href="/#" className="closebtn" onClick={toggleNav}>
+        <a href="#" className="closebtn" onClick={toggleNav}>
           &times;
         </a>
-        <a onClick={toggleNav} href="/#">
+        <a onClick={toggleNav} href="/">
           <h2>WizeStore</h2>
         </a>
       </SideNav>

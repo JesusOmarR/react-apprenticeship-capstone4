@@ -29,9 +29,22 @@ export const Nav = styled.nav`
     justify-content: space-around;
     color: red;
     padding: 0.3rem 0.5rem;
-    margin: auto 4rem;
+    margin: auto 1rem;
+    width: auto;
     border-radius: 5px;
     border: 0.5px solid rgb(192, 192, 192);
+
+    @media screen and (max-width: 768px) {
+      width: 7rem;
+    }
+  }
+
+  .searchBtn {
+    background-color: white;
+
+    img {
+      width: 1rem;
+    }
   }
 `
 
@@ -98,12 +111,17 @@ export const Bars = styled(FaBars)`
   color: black;
   @media screen and (max-width: 768px) {
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    width: 10rem;
+    top: -1.5rem;
+    left: -3rem;
     transform: translate(100%, 75%);
     font-size: 1.8rem;
     cursor: pointer;
+  }
+  @media screen and (max-width: 1024px) and (min-width: 768px) {
+    top: -1.5rem;
+    left: -6rem;
   }
 `
 export const SideNav = styled.div<Props>`

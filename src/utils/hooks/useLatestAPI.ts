@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { API_BASE_URL } from '../constants'
 
-const INITIAL_API_METADATA = { ref: null, isLoading: true }
+const INITIAL_API_METADATA: any = { ref: null, isLoading: true }
 
 export function useLatestAPI() {
   const [apiMetadata, setApiMetadata] = useState(() => INITIAL_API_METADATA)
@@ -16,7 +16,7 @@ export function useLatestAPI() {
         const response = await fetch(API_BASE_URL, {
           signal: controller.signal,
         })
-        const { refs: [{ ref } = {}] = [] } = await response.json()
+        const { refs: [{ ref = {} } = {}] = [] } = await response.json()
 
         setApiMetadata({ ref, isLoading: false })
       } catch (err) {

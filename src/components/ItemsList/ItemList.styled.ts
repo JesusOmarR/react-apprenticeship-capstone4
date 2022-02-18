@@ -36,6 +36,26 @@ export const ItemContainer = styled.div`
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0.5rem 0.5rem;
     color: black;
+    display: flex;
+
+    info {
+      width: 70%;
+    }
+
+    cart {
+      width: 20%;
+    }
+    button {
+      position: relative;
+      right: 3px;
+      height: 3rem;
+      width: 3rem;
+      color: red;
+    }
+
+    img {
+      width: 2rem;
+    }
   }
 
   .more-info {

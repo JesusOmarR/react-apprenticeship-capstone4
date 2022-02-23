@@ -3,26 +3,15 @@ import { Button } from 'react-bootstrap'
 import { Nav, NavMenu, NavBtn, SideNav, Bars } from './Navbar.styled'
 import { useHistory } from 'react-router-dom'
 import searchIcon from '../../assets/search.png'
+import { useCart } from '../../providers'
 
 function NavBar() {
   const [toggleMenu, setToggleMenu] = useState(false)
   const [searchInput, setSearchInput] = useState('')
   const history = useHistory()
 
-  /*   useEffect(() => {
-    const changeWidth = () => {
-      let width: number = innerWidth;
-      if (width >= 768) {
-        setToggleMenu(false);
-      }
-    };
-
-    window.addEventListener("resize", changeWidth);
-
-    return () => {
-      window.removeEventListener("resize", changeWidth);
-    };
-  }, []); */
+  const { cart } = useCart()
+  console.log(cart.length)
 
   const toggleNav = () => {
     setToggleMenu(!toggleMenu)
@@ -52,10 +41,11 @@ function NavBar() {
         </Button>
         <NavBtn>
           <img
-            onClick={() => toggleNav}
+            onClick={() => history.push('/cart')}
             alt="logo"
             src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
           />
+          <div className="item-counter">{cart.length}</div>
         </NavBtn>
       </Nav>
 

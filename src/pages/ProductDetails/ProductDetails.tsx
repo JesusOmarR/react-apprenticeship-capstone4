@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useSearchProduct } from '../../utils/hooks/useSearchProduct'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Loader from '../../UI/Loader'
 import Slider from 'react-slick'
 import {
@@ -11,7 +11,7 @@ import {
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { Badge, Button } from 'react-bootstrap'
-
+import { useCart } from '../../providers'
 const ProductDetails = () => {
   const settings = {
     dots: true,
@@ -23,8 +23,17 @@ const ProductDetails = () => {
   const { productId } = useParams<{ productId?: string }>()
 
   const { data, isLoading } = useSearchProduct(productId)
+  console.log(data)
 
-  console.log(data.results)
+  const { addItemToCart } = useCart()
+  const inputQty = useRef(null)
+
+  const history = useHistory()
+
+  const AddToCart = () => {
+    addItemToCart({ data: data.results[0], qty: inputQty.current.value })
+    history.push('/cart')
+  }
 
   return isLoading ? (
     <Loader />
@@ -67,8 +76,17 @@ const ProductDetails = () => {
           type="number"
           placeholder="amount"
           min={0}
+          ref={inputQty}
+          max={data.results[0].data.stock}
         />
-        <Button className="cart-btn">Add to cart</Button>
+
+        <Button
+          disabled={data.results[0].data.stock === 0}
+          className="cart-btn"
+          onClick={AddToCart}
+        >
+          Add to cart
+        </Button>
         <table>
           <tr>
             <th>Name</th>

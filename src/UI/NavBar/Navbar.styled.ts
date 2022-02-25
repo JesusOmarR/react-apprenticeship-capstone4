@@ -80,6 +80,17 @@ export const NavBtn = styled.nav`
   width: 100vw;
   img {
     width: 2.2rem;
+    cursor: pointer;
+  }
+
+  .item-counter {
+    position: relative;
+    background-color: red;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    padding: 0.1rem 0.5rem;
+    top: -10px;
+    right: 5px;
   }
   @media screen and (max-width: 768px) {
     img {
